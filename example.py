@@ -1,6 +1,6 @@
 import time
 import os
-from generics.generic import BFS, bfs
+from generics.generic import  bfs, dfs
 
 MOVES = [ #Right,Left,Down,Up
     (0, 1),
@@ -14,8 +14,7 @@ def main():
     #Start [0,0] , End [n-1,m-1]
     start = (0,0)
     end = (len(G)-1, len(G[0])-1)
-    BFS(G, start, end)
-    b = bfs(start, end)
+    b = dfs(start, end)
     print(b.search(PossiblePoints))
 
 def isValid(point):

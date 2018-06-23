@@ -1,42 +1,37 @@
 
 from collections import defaultdict, deque
 
-MOVES = [ #Right,Left,Down,Up
-    (0, 1),
-    (0, -1),
-    (1, 0),
-    (-1, 0)
-]
-
-class bfs: 
+class generic_search:
     def __init__(self, start, end):
         self.start = start
         self.end = end
 
 
     def search(self, nextPointsFunction, parent={}):
-        # deque can add and pop boths side of lists with O(1) time complexity
-        d = deque()
+        d = self._get_ds()
         visited = defaultdict(int)
         
         # add start point 
-        d.append(self.start)
+        self._add_point(d, self.start)
         
         while len(d) > 0:
-            current_point = d.popleft()
+            current_point = self._get_next_item(d)
+
             # check solution is found
             if current_point == self.end:
                 return self.get_path(parent, current_point)
 
             # get next points
-            new_points = nextPointsFunction(current_point)
+            new_points = self._get_new_points(current_point, nextPointsFunction)
             # discard visited points
             not_visited_points = filter(lambda p: not visited[p], new_points)
 
             for point in not_visited_points:
                 parent[point] = current_point
                 visited[point] = 1
-                d.append(point)
+                self._add_point(d, point)
+    
+
 
     def get_path(self, parent, current_point):
         path = [current_point]
@@ -47,3 +42,31 @@ class bfs:
         
         path.reverse()
         return path
+
+class bfs(generic_search): 
+
+    def _get_ds(self):
+        return deque()
+    
+    def _get_next_item(self, ds):
+        return ds.popleft()
+    
+    def _add_point(self, ds, item):
+        ds.append(item)
+
+    def _get_new_points(self, current_point, nextPointsFunction):
+        return nextPointsFunction(current_point)
+    
+class dfs(generic_search): 
+    
+    def _get_ds(self):
+        return deque()
+    
+    def _get_next_item(self, ds):
+        return ds.pop()
+    
+    def _add_point(self, ds, item):
+        ds.append(item)
+    
+    def _get_new_points(self, current_point, nextPointsFunction):
+        return nextPointsFunction(current_point)
