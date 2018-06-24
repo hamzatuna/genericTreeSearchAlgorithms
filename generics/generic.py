@@ -3,7 +3,7 @@ from collections import defaultdict, deque
 from heapq import heappop, heappush
 import operator
 
-
+          
 class generic_search:
     def __init__(
         self, 
