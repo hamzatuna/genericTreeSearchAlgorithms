@@ -17,7 +17,13 @@ class generic_search:
         self.costF = costF
         self.get_point_from_item = lambda x: x
 
-    def search(self, nextPointsFunction, parent={}):
+    def search(self, nextPointsFunction, parent={}, start=None, end=None):
+        if start:
+            self.start = start
+        
+        if end:
+            self.end = end
+        
         d = self._get_ds()
         visited = defaultdict(int)
         cost = {}
