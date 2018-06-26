@@ -68,7 +68,7 @@ class generic_search:
         path.reverse()
         return path
 
-class bfs(generic_search): 
+class BFS(generic_search): 
 
     def _get_ds(self):
         return deque()
@@ -82,7 +82,7 @@ class bfs(generic_search):
     def _get_new_points(self, current_point, nextPointsFunction):
         return nextPointsFunction(current_point)
     
-class dfs(generic_search): 
+class DFS(generic_search): 
     
     def _get_ds(self):
         return deque()
@@ -96,8 +96,7 @@ class dfs(generic_search):
     def _get_new_points(self, current_point, nextPointsFunction):
         return nextPointsFunction(current_point)
 
-class astar(generic_search):
-    
+class AStar(generic_search):    
     def __init__( 
         self, 
         start, 

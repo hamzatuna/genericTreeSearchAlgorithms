@@ -1,6 +1,6 @@
 import time
 import os
-from generics.generic import  bfs, dfs, astar
+from generics.generic import  BFS, DFS, AStar
 
 MOVES = [ #Right,Left,Down,Up
     (0, 1),
@@ -15,20 +15,20 @@ def main():
     start = (0,0)
     end = (len(G)-1, len(G[0])-1)
     h = lambda point: sum(x-y for x,y in zip(end, point))
-    A = astar(start, end, h)
+    astar = AStar(start, end, h)
 
-    print('astart path:', A.search(PossiblePoints))
-    print('astar cost of end', A.cost[end])
+    print('astart path:', astar.search(PossiblePoints))
+    print('astar cost of end', astar.cost[end])
 
-    B = bfs(start, end)
+    bfs = BFS(start, end)
 
-    print('bfs path:', B.search(PossiblePoints))
-    print('bfs cost of end', B.cost[end])
+    print('bfs path:', bfs.search(PossiblePoints))
+    print('bfs cost of end', bfs.cost[end])
 
-    D = dfs(start, end)
+    dfs = DFS(start, end)
 
-    print('dfs path:', D.search(PossiblePoints))
-    print('dfs cost of end', D.cost[end])
+    print('dfs path:', dfs.search(PossiblePoints))
+    print('dfs cost of end', dfs.cost[end])
 
 def isValid(point):
     return 0<=point[0]<len(G) and 0<=point[1]<len(G[0])  and (not G[point[0]][point[1]])

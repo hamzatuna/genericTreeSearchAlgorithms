@@ -1,4 +1,4 @@
-from generics.generic import  bfs, dfs, astar
+from generics.generic import  BFS, DFS, AStar
 # hacker rank knightL on chessboard solution
 
 moves = [
@@ -24,7 +24,7 @@ def get_next_pointF(pos, n):
 def get_dis_matrix(n):
     start = (0,0)
     end = (n-1, n-1)
-    b = bfs(start, end)
+    b = BFS(start, end)
     results = [[-1 for i in range(1, n)] for j in range(1, n)]
     
     for i in range(1, n):
