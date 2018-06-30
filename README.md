@@ -1,9 +1,9 @@
 # Generic Tree Search Algorithms
 Generic classes/functions are implamented for dynamic use of tree search algorithms. BFS, DFS and A* are added untill now.
 
-### Examples
+## Examples
 
-### Rat in Maze
+###  Rat in Maze
 
 You have maze as matrix: 
 
@@ -21,7 +21,7 @@ You have start point and end point. And You want to go to end point from end poi
 start = (0,0)
 end = (len(G)-1, len(G[0])-1)
 ```
-#### A* solution
+#### A* solution
 ```
 # Start [0,0] , End [n-1,m-1]
 start = (0,0)
@@ -41,14 +41,14 @@ print('astart path:', astar.search(moves))
 # cost attribute is created after search operation
 print('astar cost of end', astar.cost[end])
 ```
-#### BFS solution
+##### BFS solution
 ```
 bfs = BFS(start, end)
 
 print('bfs path:', bfs.search(moves))
 print('bfs cost of end', bfs.cost[end])
 ```
-#### DFS solution
+##### DFS solution
 ```
 dfs = DFS(start, end)
 
