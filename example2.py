@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from generics.generic import BFS
+from generics import BFS
 
 def solve(graph, start, num_nodes):
     nextF = lambda node: graph[node-1]

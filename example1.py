@@ -1,4 +1,4 @@
-from generics.generic import  BFS, DFS, AStar
+from generics import  BFS, DFS, AStar
 # hacker rank knightL on chessboard solution
 
 moves = [

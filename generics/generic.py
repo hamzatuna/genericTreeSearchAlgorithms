@@ -10,19 +10,24 @@ class generic_search:
         start, 
         end, 
         costF=lambda point, 
-            pre_point, pre_point_cost: pre_point_cost+1):
+            pre_point, pre_point_cost: pre_point_cost+1, 
+        moves=None):
         
         self.start = start
         self.end = end
         self.costF = costF
         self.get_point_from_item = lambda x: x
+        self.moves = moves
 
-    def search(self, nextPointsFunction, parent={}, start=None, end=None):
+    def search(self, moves=None, parent={}, start=None, end=None):
         if start:
             self.start = start
         
         if end:
             self.end = end
+        
+        if moves: 
+            self.moves = moves
         
         d = self._get_ds()
         visited = defaultdict(int)
@@ -40,6 +45,8 @@ class generic_search:
         while len(d) > 0:
             current_item = self._get_next_item(d)
             current_point = self.get_point_from_item(current_item)
+            
+            # get cost of current point
             cur_cost = cost[current_point]
 
             # check solution is found
@@ -47,7 +54,7 @@ class generic_search:
                 return self.get_path(parent, current_point)
 
             # get next points
-            new_points = nextPointsFunction(current_point)
+            new_points = self.moves(current_point)
 
             # update costs of points 
             for point in new_points:
