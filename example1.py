@@ -7,30 +7,33 @@ moves = [
     (1, -1), 
     (-1, -1)]
 
+# function clousure to generate nextMoves
 def get_next_pointF(pos, n):
 
-    def nextPoint(point):
-            all_moves = ([(point[0] + pos[0]*move[0], point[1] + pos[1]*move[1]) 
-                    for move in moves] + 
-                [(point[0] + pos[1]*move[0], point[1]+pos[0]*move[1]) 
-                   for move in moves])
+    def nextMoves(point):
 
-            filtered_moves = filter(lambda move: 0<=move[0]<n and 
-                        0<=move[1]<n, all_moves)
-            
-            return set(filtered_moves)
-    return nextPoint
+        all_moves = ([(point[0] + pos[0]*move[0], point[1] + pos[1]*move[1]) 
+                for move in moves] + 
+            [(point[0] + pos[1]*move[0], point[1]+pos[0]*move[1]) 
+                for move in moves])
+
+        filtered_moves = filter(lambda move: 0<=move[0]<n and 
+                    0<=move[1]<n, all_moves)
+        
+        return set(filtered_moves)
+    return nextMoves
 
 def get_dis_matrix(n):
     start = (0,0)
     end = (n-1, n-1)
     b = BFS(start, end)
+    
     results = [[-1 for i in range(1, n)] for j in range(1, n)]
     
     for i in range(1, n):
         for j in range(i, n):
-            nextF = get_next_pointF((i, j), n)
-            path = b.search(nextF)
+            nextMoves = get_next_pointF((i, j), n)
+            path = b.search(nextMoves)
 
             if path:
                 results[i-1][j-1] = len(path)-1
