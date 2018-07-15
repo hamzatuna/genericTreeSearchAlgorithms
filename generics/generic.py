@@ -7,8 +7,8 @@ import operator
 class generic_search:
     def __init__(
         self, 
-        start, 
-        end, 
+        start=None, 
+        end=None, 
         costF=lambda point, 
             pre_point, pre_point_cost: pre_point_cost+1, 
         moves=None):
